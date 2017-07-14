@@ -1,25 +1,34 @@
 package algorithms;
 
-interface UnionFind {
-	void union (int a, int b);
-	boolean find(int a, int b);
-	boolean connectedComponents();
-}
-
-class regularUnionFind implements UnionFind {
+abstract class UnionFind {
 	int []union;
-	
-	/*
-	 * Initialize the union so that everyone has a different group ID. Best to assign index value
-	 * Time Complexity: O(n)
-	 */
-	regularUnionFind(int n) {
+	UnionFind(int n) {
 		union = new int[n];
 		for (int i=0; i<n; i++) {
 			union[i]=i;
 		}
 	}
+	abstract void union (int a, int b);
+	abstract boolean find(int a, int b);
+	abstract boolean connectedComponents();
+}
+
+class regularUnionFind extends UnionFind {
+	/*
+	 * Initialize the union so that everyone has a different group ID. Best to assign index value
+	 * Time Complexity: O(n)
+	 */
+	/*regularUnionFind(int n) {
+		union = new int[n];
+		for (int i=0; i<n; i++) {
+			union[i]=i;
+		}
+	}*/
 	
+	regularUnionFind(int n) {
+		super(n);
+	}
+
 	/*
 	 * Basic implementation of union.
 	 * Time Complexity: O(n)
@@ -62,15 +71,10 @@ class regularUnionFind implements UnionFind {
 	}
 }
 
-class quickUnionFind implements UnionFind {
-	
-	int []union;
-	
+class quickUnionFind extends UnionFind {
+
 	quickUnionFind(int n) {
-		union = new int[n];
-		for (int i=0; i<n; i++) {
-			union[i]=i;
-		}
+		super(n);
 	}
 
 	public void union(int a, int b) {
