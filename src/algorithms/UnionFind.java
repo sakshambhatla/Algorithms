@@ -19,7 +19,10 @@
  * An alternative approach is to find root, and assign 1st group to 2nd group's root during union().
  * With this, union() time complexity can be O(n) worst case, but find() will be faster
  * (still O(n) find worst case when it consistently chooses to make the larger chain child of 
- * smaller chain )
+ * smaller chain ). This alternative approach can be used with some optimizations to get even better
+ * runtime complexity, as mentioned below.
+ * 
+ * Weighted QuickUnion
  */
 
 package algorithms;
@@ -44,7 +47,7 @@ abstract class UnionFind {
 }
 
 class quickFind extends UnionFind {
-
+	
 	quickFind(int n) {
 		super(n);
 	}
@@ -95,8 +98,7 @@ class quickFind extends UnionFind {
  * A faster method for UnionFind where every index points to the parent index instead of
  * 1 global group.  
  */
-class quickUnion extends UnionFind {
-	
+class quickUnion extends UnionFind {	
 	quickUnion(int n) {
 		super(n);
 	}
@@ -145,6 +147,31 @@ class quickUnion extends UnionFind {
 
 	public boolean connectedComponents() {
 		return false;
+	}	
+}
+
+/*
+ * An even faster method for UnionFind where every index points to the parent index instead of
+ * 1 global group, and during a union, we always join the smaller tree to the larger tree.
+ */
+class weightedQuickUnion extends UnionFind {
+	
+	weightedQuickUnion(int n) {
+		super(n);
 	}
 	
+	/*
+	 *
+	 */
+	public void union(int a, int b) {
+		union[a] = union[b];
+	}
+
+	boolean find(int a, int b) {
+		return false;
+	}
+
+	boolean connectedComponents() {
+		return false;
+	}
 }
