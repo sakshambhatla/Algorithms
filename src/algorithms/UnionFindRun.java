@@ -25,7 +25,7 @@ public class UnionFindRun {
 		System.out.println("Enter number of components");
 		Scanner sc = new Scanner(System.in);
 		int n = sc.nextInt();
-		quickUnionFind uf = new quickUnionFind(n);
+		quickUnion uf = new quickUnion(n);
 		
 		System.out.println("Enter number of connections");
 		int m = sc.nextInt();

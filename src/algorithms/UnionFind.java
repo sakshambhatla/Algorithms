@@ -1,3 +1,27 @@
+/*
+ * UnionFind-
+ * Union: Assign components to be part of one group.
+ * Find: Are the components part of the same group?
+ * 
+ * QuickFind- 
+ * For union, set every single group member holding 1st ID to 2nd. O(n)
+ * For find, just see if group ID's are same. O(1)
+ * A different way to visualize this is to imagine this as a tree, in which during every union,
+ * we traverse the array to ensure that each element of a group updates itself to point to the root
+ * directly, making it flat, and thus making find O(1).
+ * 
+ * QuickUnion-
+ * For union, do the lazy approach. Set group 1 to group 2. (Essentially, group 1 points to group 2
+ * as its parent). O(1)
+ * For find, traverse the array as a tree. Consider that each member points to its parent's group
+ * ID. If roots of both elements is same, they're in the same group. O(n)
+ * 
+ * An alternative approach is to find root, and assign 1st group to 2nd group's root during union().
+ * With this, union() time complexity can be O(n) worst case, but find() will be faster
+ * (still O(n) find worst case when it consistently chooses to make the larger chain child of 
+ * smaller chain )
+ */
+
 package algorithms;
 
 abstract class UnionFind {
@@ -13,20 +37,20 @@ abstract class UnionFind {
 			union[i]=i;
 		}
 	}
+	
 	abstract void union (int a, int b);
 	abstract boolean find(int a, int b);
 	abstract boolean connectedComponents();
 }
 
-class regularUnionFind extends UnionFind {
+class quickFind extends UnionFind {
 
-	
-	regularUnionFind(int n) {
+	quickFind(int n) {
 		super(n);
 	}
 
 	/*
-	 * Basic implementation of union.
+	 * Run through the array, replacing 1st groupID to 2nd.
 	 * Time Complexity: O(n)
 	 */
 	public void union(int a, int b) {
@@ -71,12 +95,15 @@ class regularUnionFind extends UnionFind {
  * A faster method for UnionFind where every index points to the parent index instead of
  * 1 global group.  
  */
-class quickUnionFind extends UnionFind {
-
-	quickUnionFind(int n) {
+class quickUnion extends UnionFind {
+	
+	quickUnion(int n) {
 		super(n);
 	}
 
+	/*
+	 * Lazy approach - Just assign 1st group to 2nd. O(1) complexity.
+	 */
 	public void union(int a, int b) {
 		union[a] = union[b];
 	}
@@ -86,7 +113,7 @@ class quickUnionFind extends UnionFind {
 	}
 
 	/*
-	 * Keep traversing graph till you reach parent. If parents of a and b are same, they're in 
+	 * Keep traversing tree till you reach parent. If parents of a and b are same, they're in 
 	 * same group.
 	 * Also, if you encounter the other peer while traversing, you don't need to go all the way till
 	 * the parent to confirm.

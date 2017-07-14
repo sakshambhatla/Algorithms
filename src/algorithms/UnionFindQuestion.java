@@ -114,7 +114,7 @@ class Friendship {
 			}
 		}
 		
-		regularUnionFind regUnion = new regularUnionFind(friendID.size());
+		quickFind regUnion = new quickFind(friendID.size());
 		
 		/*
 		 * For every entry in log, do a union. Then check if union is complete.
