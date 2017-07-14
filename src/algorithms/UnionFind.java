@@ -23,6 +23,13 @@
  * runtime complexity, as mentioned below.
  * 
  * Weighted QuickUnion
+ * We introduce a new function to find root.
+ * We introduce a new array of size n to store weights.
+ * For union, we always assign the smaller tree to the larger tree by checking weights. This makes
+ * time complexity log(n) since at any moment in the union, the two trees joining will be 
+ * atleast double the size of the individual trees. So the max times we'd need to do a union 
+ * would be log(n). We also update the root in the weight array to reflect depth of tree.
+ * For find, no change from before.
  */
 
 package algorithms;
