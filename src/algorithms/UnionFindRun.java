@@ -25,7 +25,7 @@ public class UnionFindRun {
 		System.out.println("Enter number of components");
 		Scanner sc = new Scanner(System.in);
 		int n = sc.nextInt();
-		quickUnion uf = new quickUnion(n);
+		weightedQuickUnion uf = new weightedQuickUnion(n);
 		
 		System.out.println("Enter number of connections");
 		int m = sc.nextInt();

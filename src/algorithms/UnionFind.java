@@ -27,6 +27,8 @@
 
 package algorithms;
 
+import java.util.Arrays;
+
 abstract class UnionFind {
 	int []union;
 	
@@ -86,11 +88,7 @@ class quickFind extends UnionFind {
 	}
 	
 	public boolean find(int a, int b) {
-		if (union[a] == union[b]) {
-			return true;
-		}
-		
-		return false;
+		return (union[a] == union[b]);
 	}
 }
 
@@ -155,20 +153,39 @@ class quickUnion extends UnionFind {
  * 1 global group, and during a union, we always join the smaller tree to the larger tree.
  */
 class weightedQuickUnion extends UnionFind {
+	int []weightArr;
 	
 	weightedQuickUnion(int n) {
 		super(n);
+		weightArr = new int[n];
+		Arrays.fill(weightArr, 1);
+	}
+	
+	int getRoot(int i) {
+		while (union[i] != i) {
+			i = union[i];
+		}
+		
+		return i;
 	}
 	
 	/*
 	 *
 	 */
 	public void union(int a, int b) {
-		union[a] = union[b];
+		int aRoot = getRoot(a);
+		int bRoot = getRoot(b);
+		if (weightArr[aRoot] >= weightArr[bRoot]) {
+			union[b] = aRoot;
+			weightArr[aRoot] += weightArr[bRoot];
+		} else {
+			union[a] = bRoot;
+			weightArr[bRoot] += weightArr[aRoot];
+		}
 	}
 
 	boolean find(int a, int b) {
-		return false;
+		return (getRoot(a) == getRoot(b));
 	}
 
 	boolean connectedComponents() {
