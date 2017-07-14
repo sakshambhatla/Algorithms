@@ -65,6 +65,13 @@ class regularUnionFind implements UnionFind {
 class quickUnionFind implements UnionFind {
 	
 	int []union;
+	
+	quickUnionFind(int n) {
+		union = new int[n];
+		for (int i=0; i<n; i++) {
+			union[i]=i;
+		}
+	}
 
 	public void union(int a, int b) {
 		

@@ -103,7 +103,6 @@ class Friendship {
 		 */
 		for (int i=0; i<m; i++) {
 			FriendConnection fc = flog.getFriendConnectionbyIndex(i);
-			//System.out.println("Timestamp " + fc.timestamp);
 			if (!friendID.containsKey(fc.a)) {
 				friendID.put(fc.a, j);
 				j++;
@@ -114,8 +113,6 @@ class Friendship {
 				j++;
 			}
 		}
-	
-		//System.out.println("union size is " + union.length);
 		
 		regularUnionFind regUnion = new regularUnionFind(friendID.size());
 		
@@ -125,9 +122,10 @@ class Friendship {
 		 */
 		for (int i=0; i<m; i++) {
 			FriendConnection fc = flog.getFriendConnectionbyIndex(i);
-			//System.out.print("a's index is " + friendID.get(fc.a) + " and b's index is " + friendID.get(fc.b) + "; ");
-			//System.out.println("a's group is " + union[friendID.get(fc.a)] + " and b's group is " + union[friendID.get(fc.b)]);
 			
+			/*
+			 * Get the Friend, and get the groupID from that (corresponds to index of union array)
+			 */
 			regUnion.union(friendID.get(fc.a), friendID.get(fc.b));
 			
 			if (regUnion.connectedComponents()) {
