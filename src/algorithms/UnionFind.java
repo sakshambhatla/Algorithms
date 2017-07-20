@@ -30,6 +30,14 @@
  * atleast double the size of the individual trees. So the max times we'd need to do a union 
  * would be log(n). We also update the root in the weight array to reflect depth of tree.
  * For find, no change from before.
+ * 
+ * Weighted QuickUnion with Path Compression
+ * While finding root, we also compress the path. For every node we visit, we make it point to 
+ * its grandparent instead of parent. Path length halves.
+ * 
+ * Weighted QuickUnion with Extreme Path Compression
+ * While finding root, we also compress the path. For every node we visit, we make it point to 
+ * the root.
  */
 
 package algorithms;
@@ -157,7 +165,7 @@ class quickUnion extends UnionFind {
 
 /*
  * An even faster method for UnionFind where every index points to the parent index instead of
- * 1 global group, and during a union, we always join the smaller tree to the larger tree.
+ * 1 global group, and during a union, we always join the smaller tree to the root of larger tree.
  */
 class weightedQuickUnion extends UnionFind {
 	int []weightArr;
@@ -177,7 +185,7 @@ class weightedQuickUnion extends UnionFind {
 	}
 	
 	/*
-	 *
+	 * Tree grows logarithmically, since the smaller tree joins the root of the larger tree.
 	 */
 	public void union(int a, int b) {
 		int aRoot = getRoot(a);
@@ -197,5 +205,49 @@ class weightedQuickUnion extends UnionFind {
 
 	boolean connectedComponents() {
 		return false;
+	}
+}
+
+/*
+ * Even faster with Path Compression. Time Complexity: O(lg*n)
+ */
+class weightedQuickUnionPC extends weightedQuickUnion {
+	
+	weightedQuickUnionPC(int n) {
+		super(n);
+	}
+
+	int getRoot(int i) {
+		while (union[i] != i) {
+			union[i] = union[union[i]];
+			i = union[i];
+		}
+		
+		return i;
+	}
+}
+
+/*
+ * Even faster with Extreme Path Compression. Time Complexity: O(lg*n)
+ */
+class weightedQuickUnionEPC extends weightedQuickUnion {
+
+	weightedQuickUnionEPC(int n) {
+		super(n);
+	}
+	
+	int getRoot(int i) {
+		while (union[i] != i) {
+			int j = union[i];
+			
+			while (union[j] != j) {
+				j = union[j];
+			}
+
+			i = union[i];
+			union[i] = j;
+		}
+		
+		return i;
 	}
 }
