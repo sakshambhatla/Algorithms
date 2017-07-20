@@ -5,4 +5,5 @@ public interface CustomList<Type> {
 	Type pop();
 	boolean isEmpty();
 	void print();
+	int size();
 }

@@ -19,11 +19,13 @@ public class CustomStackUsingLinkedList<Type> implements CustomList<Type> {
 		temp.val = val;
 		temp.next = head;
 		head = temp;
+		n++;
 	}
 	
 	public Type pop() {
 		Type temp = head.val;
 		head = head.next;
+		n--;
 		return temp;
 	}
 	
@@ -37,5 +39,9 @@ public class CustomStackUsingLinkedList<Type> implements CustomList<Type> {
 			System.out.println(temp.val);
 			temp = temp.next;
 		}
+	}
+	
+	public int size() {
+		return (n);
 	}
 }

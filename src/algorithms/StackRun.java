@@ -3,7 +3,7 @@ package algorithms;
 public class StackRun {
 
 	public static void main(String[] args) {
-		CustomStackUsingLinkedList<Integer> myList = new CustomStackUsingLinkedList<Integer>();
+		CustomStackUsingArray<Integer> myList = new CustomStackUsingArray<Integer>();
 		myList.push(10);
 		myList.push(20);
 		myList.push(30);
