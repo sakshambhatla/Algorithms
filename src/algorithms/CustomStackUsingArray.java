@@ -7,7 +7,7 @@ public class CustomStackUsingArray<Type> implements CustomList<Type> {
 	
 	@SuppressWarnings("unchecked")
 	CustomStackUsingArray() {
-		arr = (Type[]) new Object[10];
+		arr = (Type[]) new Object[2];
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -15,11 +15,31 @@ public class CustomStackUsingArray<Type> implements CustomList<Type> {
 		arr = (Type[]) new Object[capacity];
 	}
 	
+	private void changeCapacity(int capacity) {
+		@SuppressWarnings("unchecked")
+		Type []temp = (Type[]) new Object[capacity];
+		for (int i=0; i<arr.length; i++) {
+			temp[i] = arr[i];
+		}
+		
+		arr = temp;
+	}
+	
 	public void push(Type val) {
-		arr[++head] = val;
+		head++;
+		
+		if(head >= arr.length*3/4) {
+			changeCapacity(arr.length*2);
+		}
+		
+		arr[head] = val;
 	}
 	
 	public Type pop() {
+		if (head == 0) {
+			return null;
+		}
+		
 		return (arr[head--]);
 	}
 	

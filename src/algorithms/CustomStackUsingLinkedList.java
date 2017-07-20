@@ -23,6 +23,10 @@ public class CustomStackUsingLinkedList<Type> implements CustomList<Type> {
 	}
 	
 	public Type pop() {
+		if (n == 0) {
+			return null;
+		}
+		
 		Type temp = head.val;
 		head = head.next;
 		n--;
