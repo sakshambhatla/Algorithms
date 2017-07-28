@@ -2,13 +2,25 @@ package datastructure;
 
 public class BinarySearchTree {
 	
-	class node {
+	public class node {
 		int val;
 		node left;
 		node right;
+		
+		public int getVal() {
+			return val;
+		}
+		
+		public node getLeft() {
+			return left;
+		}
+		
+		public node getRight() {
+			return right;
+		}
 	}
 	
-	node root;
+	private node root;
 	
 	public void insert(int value) {
 		if (root == null) {
@@ -44,6 +56,10 @@ public class BinarySearchTree {
 		}
 	}
 
+	public node getRoot() {
+		return root;
+	}
+	
 	public void preOrder() {
 		preOrderRecurse(root);
 	}

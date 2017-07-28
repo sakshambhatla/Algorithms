@@ -12,7 +12,7 @@ public class CustomStackUsingLinkedList<Type> implements CustomList<Type> {
 		Node next;
 	}
 	
-	CustomStackUsingLinkedList() {
+	public CustomStackUsingLinkedList() {
 		n = 0;
 	}
 	
