@@ -1,46 +1,49 @@
 package datastructure;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Graph{
-	public Node []node;
+	public ArrayList<Node> node;
+	public int size;
 	
-	public Graph(int n) {
-		node = new Node[n];
+	public Graph() {
+		node = new ArrayList<Node>();
 	}
 	
-	public void initNode(int index, String name) {
-		node[index] = new Node();
-		setName(index, name);
+	public void initNode(String name) {
+		node.add(new Node());
+		setName(size, name);
+		size++;
 	}
 	
 	public void setName(int index, String name) {
-		node[index].name = name;
+		node.get(index).name = name;
 	}
 	
 	public String getName(int index) {
-		return node[index].name;
+		return node.get(index).name;
 	}
 	
 	public void setNeighborUndirected(int index1, int index2) {
-		node[index1].setNeighbor(index2);
-		node[index2].setNeighbor(index1);
+		node.get(index1).setNeighbor(index2);
+		node.get(index2).setNeighbor(index1);
 	}
 	
 	public void setNeighborDirected(int first, int second) {
-		node[first].setNeighbor(second);
+		node.get(first).setNeighbor(second);
 	}
 	
 	public void setColor(int index, int val) {
-		node[index].color = val;
+		node.get(index).color = val;
 	}
 	
 	public int getColor(int index) {
-		return node[index].color;
+		return node.get(index).color;
 	}
 	
 	public HashSet<Integer> getAllNeighbors(int index) {
-		return node[index].neighbors;
+		return node.get(index).neighbors;
 	}
 	
 	public class Node{
@@ -48,7 +51,7 @@ public class Graph{
 		private HashSet<Integer> neighbors;
 		private int color;
 		
-		Node() {
+		public Node() {
 			neighbors = new HashSet<Integer>();
 		}
 		
