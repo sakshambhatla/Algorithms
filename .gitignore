@@ -1,3 +1,4 @@
 *.pdf
 src/problem/ColorGraphOptimal.java
 src/problem/test.java
+*.DS_Store
