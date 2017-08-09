@@ -1,6 +1,4 @@
 package problem;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -11,7 +9,8 @@ import datastructure.Graph;
  * Given an undirected graph with maximum degree D, find a graph coloring using at most 
  * D+1 colors.
  * Gotchas:
- * Have a node for visited to prevent loops.
+ * Have a node for visited to prevent cycles.
+ * Have a check for loop: when current node is also neighbor.
  */
 
 public class ColorGraph {
@@ -32,7 +31,7 @@ public class ColorGraph {
 			for (int i=0; i<graph.size+1; i++) {
 				colorSet.add(i);
 			}
-			System.out.println("Curr is " + curr + " with color " + graph.getColor(curr));
+			//System.out.println("Curr is " + curr + " with color " + graph.getColor(curr));
 			colorSet.remove(graph.getColor(curr));
 			
 			HashSet<Integer> Neighbors = graph.getAllNeighbors(curr);
@@ -43,7 +42,7 @@ public class ColorGraph {
 				}
 				System.out.println("Neighbor is " + neighbor);
 				if (visited[neighbor] == true) {
-					System.out.println("Neighbor " + neighbor + " already visited");
+					//System.out.println("Neighbor " + neighbor + " already visited");
 					colorSet.remove(graph.getColor(neighbor));
 				}
 			}
@@ -54,7 +53,7 @@ public class ColorGraph {
 					System.out.println("Neighbor " + neighbor + " NOT visited before" );
 					visited[neighbor] = true;
 					int next = (Integer) iter.next();
-					System.out.println("next color is " + next);
+					//System.out.println("next color is " + next);
 					graph.setColor(neighbor, next);
 					Q.addLast(neighbor);
 				}
@@ -93,6 +92,7 @@ public class ColorGraph {
 		graph.initNode("E");
 		graph.initNode("F");
 		graph.initNode("G");
+		graph.initNode("H");
 		graph.setNeighborUndirected(0, 1);
 		graph.setNeighborUndirected(1, 2);
 		graph.setNeighborUndirected(2, 3);
@@ -102,6 +102,7 @@ public class ColorGraph {
 		graph.setNeighborUndirected(4, 6);
 		graph.setNeighborUndirected(5, 6);
 		graph.setNeighborUndirected(5, 0);
+		graph.setNeighborUndirected(6, 7);
 		
 		if (ColorAll(graph) == true) {
 			System.out.println("Successfully colored the graph");
