@@ -21,7 +21,7 @@ public class removeDuplicatesInPlace {
 		/* This may appear to be O(n*n), but it's O(n) */
 		for (int i=0; i<arr.length - range; i++) {
 			int j;
-			for (j=i+1; j<arr.length && arr[i] == arr[j]; j++) {
+			for (j=i+1; j<arr.length-range && arr[i] == arr[j]; j++) {
 				continue;
 			}
 			resizeArr(i+1, j);
