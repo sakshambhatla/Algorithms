@@ -1,4 +1,6 @@
 *.pdf
 src/problem/ColorGraphOptimal.java
 src/problem/test.java
+src/problem/MediaAlphaCoding.java
 *.DS_Store
+bin

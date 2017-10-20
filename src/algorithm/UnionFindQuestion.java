@@ -40,7 +40,7 @@ public class UnionFindQuestion {
 
 class FriendConnection {
 	int a;
-	int b;
+	int b; 
 	long timestamp;
 }
 
