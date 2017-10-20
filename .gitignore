@@ -2,5 +2,6 @@
 src/problem/ColorGraphOptimal.java
 src/problem/test.java
 src/problem/MediaAlphaCoding.java
-*.DS_Store
+.DS_Store
+.classpath
 bin
