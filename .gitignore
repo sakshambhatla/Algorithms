@@ -4,4 +4,6 @@ src/problem/test.java
 src/problem/MediaAlphaCoding.java
 .DS_Store
 .classpath
+.project
+.settings
 bin
